@@ -1,4 +1,57 @@
-# Personal Fitness Tracker API
+# Personal Fitness Tracker
+
+## Project Update
+
+### Completed Work
+
+- **Project Setup**
+  - Initialized the project with the necessary file structure.
+  - Set up an Express server to handle API requests.
+  - Established a connection to MongoDB using Mongoose.
+  - Configured basic middleware for the server (e.g., body-parser, morgan).
+  - Created a basic User model with authentication and authorization routes.
+  - Implemented JWT-based authentication with the secret key.
+
+### Work in Progress
+
+- **CRUD Operations for Fitness Data**
+  - Designing and implementing CRUD routes for tracking workouts and nutrition data.
+  - Setting up Mongoose schemas for fitness-related data models.
+- **Advanced MongoDB Functionalities**
+  - Implementing text search, aggregations, and lookups for enhanced data querying.
+- **API Testing**
+  - Writing tests using Jest to ensure robust API functionality.
+  - Aiming for test coverage greater than 80%.
+- **Frontend Development**
+  - Setting up a simple front-end using ReactJS with Vite.
+  - Building components to interact with the API.
+- **Documentation**
+  - Creating comprehensive API documentation using Postman.
+  - Adding more detailed comments and descriptions within the codebase.
+
+### Next Steps
+
+1. Complete the CRUD routes for fitness data.
+2. Enhance the API with advanced MongoDB features.
+3. Develop the frontend application with ReactJS.
+4. Write and run tests to achieve the desired test coverage.
+5. Finalize API documentation and create usage examples.
+
+### Getting Started
+
+1. Clone the repository:
+   git clone https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
+   cd https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
+
+2. Install dependencies:
+   npm install
+3. Set up environment variables:
+   - Create a .env file in the root directory with the following content:
+     MONGO_URI=mongodb://localhost:27017/fitness-tracker
+     JWT_SECRET=myVerySecretKey042883
+     PORT=5001
+4. Run the server:
+   npm start
 
 ## Project Overview
 
