@@ -40,18 +40,19 @@
 ### Getting Started
 
 1. Clone the repository:
-   git clone https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
-   cd https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
+
+   - git clone https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
+   - cd https://github.com/vtranuw/Personal-Fitness-Tracker-App.git
 
 2. Install dependencies:
-   npm install
+   - npm install
 3. Set up environment variables:
    - Create a .env file in the root directory with the following content:
-     MONGO_URI=mongodb://localhost:27017/fitness-tracker
-     JWT_SECRET=myVerySecretKey042883
-     PORT=5001
+     - MONGO_URI=mongodb://localhost:27017/fitness-tracker
+     - JWT_SECRET=myVerySecretKey042883
+     - PORT=5001
 4. Run the server:
-   npm start
+   - npm start
 
 ## Project Overview
 
