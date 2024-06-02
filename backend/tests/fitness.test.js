@@ -12,14 +12,14 @@ describe("Fitness API", () => {
 
     await User.deleteMany({}); // Ensure no duplicate user issues
     const user = new User({
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Viet Tran",
+      email: "viet@example.com",
       password: "password123",
     });
     await user.save();
 
     const res = await request(app).post("/api/users/login").send({
-      email: "john@example.com",
+      email: "viet@example.com",
       password: "password123",
     });
 

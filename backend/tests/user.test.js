@@ -18,8 +18,8 @@ describe("User API", () => {
 
   it("should register a new user", async () => {
     const res = await request(app).post("/api/users/register").send({
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Viet Tran",
+      email: "viet@example.com",
       password: "password123",
     });
     expect(res.statusCode).toEqual(201);
@@ -28,14 +28,14 @@ describe("User API", () => {
 
   it("should not register a user with the same email", async () => {
     await new User({
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Viet Tran",
+      email: "viet@example.com",
       password: "password123",
     }).save();
 
     const res = await request(app).post("/api/users/register").send({
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Viet Tran",
+      email: "viet@example.com",
       password: "password123",
     });
 
@@ -45,14 +45,14 @@ describe("User API", () => {
 
   it("should login a user", async () => {
     const user = new User({
-      name: "Jane Doe",
-      email: "jane@example.com",
+      name: "Phuong Tran",
+      email: "phuong@example.com",
       password: "password123",
     });
     await user.save();
 
     const res = await request(app).post("/api/users/login").send({
-      email: "jane@example.com",
+      email: "phuong@example.com",
       password: "password123",
     });
     expect(res.statusCode).toEqual(200);
@@ -61,14 +61,14 @@ describe("User API", () => {
 
   it("should get user profile", async () => {
     const user = new User({
-      name: "Jane Doe",
-      email: "jane@example.com",
+      name: "NaNa Tran",
+      email: "nana@example.com",
       password: "password123",
     });
     await user.save();
 
     const loginRes = await request(app).post("/api/users/login").send({
-      email: "jane@example.com",
+      email: "nana@example.com",
       password: "password123",
     });
 
@@ -79,7 +79,7 @@ describe("User API", () => {
       .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty("name", "Jane Doe");
-    expect(res.body).toHaveProperty("email", "jane@example.com");
+    expect(res.body).toHaveProperty("name", "NaNa Tran");
+    expect(res.body).toHaveProperty("email", "nana@example.com");
   });
 });
