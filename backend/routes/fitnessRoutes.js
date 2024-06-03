@@ -1,20 +1,25 @@
-const express = require('express');
+const express = require("express");
 const {
   getExercises,
   addExercise,
   updateExercise,
   deleteExercise,
-} = require('../controllers/fitnessController');
-const authMiddleware = require('../middleware/authMiddleware');
+  getTotalDuration,
+} = require("../controllers/fitnessController");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.route('/')
+router
+  .route("/")
   .get(authMiddleware, getExercises)
   .post(authMiddleware, addExercise);
 
-router.route('/:id')
+router
+  .route("/:id")
   .put(authMiddleware, updateExercise)
   .delete(authMiddleware, deleteExercise);
+
+router.route("/totalDuration").get(authMiddleware, getTotalDuration);
 
 module.exports = router;

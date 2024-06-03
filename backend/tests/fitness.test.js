@@ -6,17 +6,19 @@ const Fitness = require("../models/Fitness");
 
 describe("Fitness API", () => {
   let token;
+  let userId;
 
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URI);
 
-    await User.deleteMany({}); // Ensure no duplicate user issues
+    await User.deleteMany({});
     const user = new User({
       name: "Viet Tran",
       email: "viet@example.com",
       password: "password123",
     });
-    await user.save();
+    const savedUser = await user.save();
+    userId = savedUser._id;
 
     const res = await request(app).post("/api/users/login").send({
       email: "viet@example.com",
@@ -56,7 +58,7 @@ describe("Fitness API", () => {
 
   it("should update an exercise", async () => {
     const newExercise = new Fitness({
-      user: new mongoose.Types.ObjectId(),
+      user: userId,
       exercise: "Running",
       duration: 30,
     });
@@ -77,7 +79,7 @@ describe("Fitness API", () => {
 
   it("should delete an exercise", async () => {
     const newExercise = new Fitness({
-      user: new mongoose.Types.ObjectId(),
+      user: userId,
       exercise: "Running",
       duration: 30,
     });
@@ -89,7 +91,7 @@ describe("Fitness API", () => {
 
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("message", "Exercise removed");
-  }, 10000); // Increase the timeout for this test
+  }, 10000);
 
   it("should handle errors when adding a new exercise", async () => {
     const res = await request(app)
@@ -123,5 +125,21 @@ describe("Fitness API", () => {
 
     expect(res.statusCode).toEqual(404);
     expect(res.body).toHaveProperty("message", "Exercise not found");
+  });
+
+  it("should get total exercise duration", async () => {
+    await new Fitness({
+      user: userId,
+      exercise: "Running",
+      duration: 30,
+    }).save();
+
+    const res = await request(app)
+      .get("/api/fitness/totalDuration")
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveLength(1);
+    expect(res.body[0]).toHaveProperty("totalDuration", 30);
   });
 });

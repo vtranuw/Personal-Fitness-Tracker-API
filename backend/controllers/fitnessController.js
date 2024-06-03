@@ -53,3 +53,15 @@ exports.deleteExercise = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+exports.getTotalDuration = async (req, res) => {
+  try {
+    const totalDuration = await Fitness.aggregate([
+      { $match: { user: req.user._id } },
+      { $group: { _id: '$user', totalDuration: { $sum: '$duration' } } }
+    ]);
+    res.json(totalDuration);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};

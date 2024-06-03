@@ -22,17 +22,18 @@ const connectDB = async () => {
     console.log("MongoDB connected");
   } catch (err) {
     console.error("MongoDB connection error:", err);
-    throw err;
+    throw err; // Re-throw the error to be caught in server.js
   }
 };
 
 app.use("/api/users", userRoutes);
 app.use("/api/fitness", authMiddleware, fitnessRoutes);
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
 module.exports = app;
-module.exports.connectDB = connectDB;
+module.exports.connectDB = connectDB; // Export connectDB for use in server.js
