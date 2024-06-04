@@ -1,90 +1,26 @@
-// // src/components/ExerciseList.jsx
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Container, List, ListItem, ListItemText, Typography } from '@mui/material';
-// import '../axiosConfig'; // Import the axios config to ensure the baseURL is set
-
-// const ExerciseList = () => {
-//   const [exercises, setExercises] = useState([]);
-
-//   useEffect(() => {
-//     const fetchExercises = async () => {
-//       const { data } = await axios.get('/api/fitness');
-//       setExercises(data);
-//     };
-
-//     fetchExercises();
-//   }, []);
-
-//   return (
-//     <Container>
-//       <Typography variant="h4" component="h2" gutterBottom>
-//         Exercise List
-//       </Typography>
-//       <List>
-//         {exercises.map((exercise) => (
-//           <ListItem key={exercise._id}>
-//             <ListItemText
-//               primary={exercise.exercise}
-//               secondary={`Duration: ${exercise.duration} minutes`}
-//             />
-//           </ListItem>
-//         ))}
-//       </List>
-//     </Container>
-//   );
-// };
-
-// export default ExerciseList;
-// --------------------------------------------------------------------------------------
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Container, List, ListItem, ListItemText, Typography } from '@mui/material';
-
-// const ExerciseList = () => {
-//   const [exercises, setExercises] = useState([]);
-
-//   useEffect(() => {
-//     const fetchExercises = async () => {
-//       const { data } = await axios.get('/api/fitness');
-//       setExercises(data);
-//     };
-
-//     fetchExercises();
-//   }, []);
-
-//   return (
-//     <Container>
-//       <Typography variant="h4" component="h2" gutterBottom>
-//         Exercise List
-//       </Typography>
-//       <List>
-//         {exercises.map((exercise) => (
-//           <ListItem key={exercise._id}>
-//             <ListItemText
-//               primary={exercise.exercise}
-//               secondary={`Duration: ${exercise.duration} minutes`}
-//             />
-//           </ListItem>
-//         ))}
-//       </List>
-//     </Container>
-//   );
-// };
-
-// export default ExerciseList;
-// -------------------------------------------------------------------
-// Modify ExerciseList.js to Include the Token
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, List, ListItem, ListItemText, Typography } from '@mui/material';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  Button,
+  TextField,
+  Box,
+} from "@mui/material";
 
 const ExerciseList = () => {
   const [exercises, setExercises] = useState([]);
+  const [editExerciseId, setEditExerciseId] = useState(null);
+  const [newExercise, setNewExercise] = useState("");
+  const [newDuration, setNewDuration] = useState("");
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     const fetchExercises = async () => {
-      const token = localStorage.getItem('token'); // Get the token from local storage
+      const token = localStorage.getItem("token");
 
       if (token) {
         const config = {
@@ -94,31 +30,142 @@ const ExerciseList = () => {
         };
 
         try {
-          const { data } = await axios.get('/api/fitness', config);
+          const { data } = await axios.get("/api/fitness", config);
           setExercises(data);
         } catch (error) {
-          console.error('Error fetching exercises:', error);
+          console.error("Error fetching exercises:", error);
         }
       } else {
-        console.error('No token found');
+        console.error("No token found");
+      }
+    };
+
+    const fetchTotalDuration = async () => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        try {
+          const { data } = await axios.get(
+            "/api/fitness/totalDuration",
+            config
+          );
+          setTotalDuration(data[0]?.totalDuration || 0);
+        } catch (error) {
+          console.error("Error fetching total duration:", error);
+        }
+      } else {
+        console.error("No token found");
       }
     };
 
     fetchExercises();
+    fetchTotalDuration();
   }, []);
+
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      try {
+        await axios.delete(`/api/fitness/${id}`, config);
+        setExercises(exercises.filter((exercise) => exercise._id !== id));
+      } catch (error) {
+        console.error("Error deleting exercise:", error);
+      }
+    } else {
+      console.error("No token found");
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      try {
+        const { data } = await axios.put(
+          `/api/fitness/${editExerciseId}`,
+          { exercise: newExercise, duration: newDuration },
+          config
+        );
+        setExercises(
+          exercises.map((exercise) =>
+            exercise._id === editExerciseId ? data : exercise
+          )
+        );
+        setEditExerciseId(null);
+        setNewExercise("");
+        setNewDuration("");
+      } catch (error) {
+        console.error("Error updating exercise:", error);
+      }
+    } else {
+      console.error("No token found");
+    }
+  };
 
   return (
     <Container>
       <Typography variant="h4" component="h2" gutterBottom>
         Exercise List
       </Typography>
+      <Typography variant="h6" component="h3" gutterBottom>
+        Total Duration: {totalDuration} minutes
+      </Typography>
       <List>
         {exercises.map((exercise) => (
           <ListItem key={exercise._id}>
-            <ListItemText
-              primary={exercise.exercise}
-              secondary={`Duration: ${exercise.duration} minutes`}
-            />
+            {editExerciseId === exercise._id ? (
+              <Box component="form" onSubmit={handleUpdate}>
+                <TextField
+                  value={newExercise}
+                  onChange={(e) => setNewExercise(e.target.value)}
+                  label="Exercise"
+                  required
+                />
+                <TextField
+                  value={newDuration}
+                  onChange={(e) => setNewDuration(e.target.value)}
+                  label="Duration"
+                  type="number"
+                  required
+                />
+                <Button type="submit">Update</Button>
+                <Button onClick={() => setEditExerciseId(null)}>Cancel</Button>
+              </Box>
+            ) : (
+              <>
+                <ListItemText
+                  primary={exercise.exercise}
+                  secondary={`Duration: ${exercise.duration} minutes`}
+                />
+                <Button onClick={() => setEditExerciseId(exercise._id)}>
+                  Edit
+                </Button>
+                <Button onClick={() => handleDelete(exercise._id)}>
+                  Delete
+                </Button>
+              </>
+            )}
           </ListItem>
         ))}
       </List>
