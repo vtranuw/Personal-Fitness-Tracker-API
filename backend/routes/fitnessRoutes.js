@@ -5,6 +5,7 @@ const {
   updateExercise,
   deleteExercise,
   getTotalDuration,
+  searchExercises,
 } = require("../controllers/fitnessController");
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -21,5 +22,7 @@ router
   .delete(authMiddleware, deleteExercise);
 
 router.route("/totalDuration").get(authMiddleware, getTotalDuration);
+
+router.route("/search").get(authMiddleware, searchExercises);
 
 module.exports = router;

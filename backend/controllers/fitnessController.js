@@ -65,3 +65,16 @@ exports.getTotalDuration = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+exports.searchExercises = async (req, res) => {
+  try {
+    const { query } = req.query;
+    const exercises = await Fitness.find({
+      user: req.user._id,
+      $text: { $search: query },
+    });
+    res.json(exercises);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};

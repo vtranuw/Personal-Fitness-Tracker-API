@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, TextField, Button, Typography, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,12 +34,15 @@ const Login = () => {
         },
       });
 
+      localStorage.setItem("user", JSON.stringify(userProfile.data)); // Store user info
+
       console.log("Logged-in user info:", userProfile.data); // Log user info to console
 
-      // If successful, you can navigate to another page
+      // Navigate to exercises page after login
+      navigate("/exercises");
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setError("User does not exist. Please register.");
+        setError("Invalid email or password. Please try again.");
       } else {
         setError("An error occurred. Please try again.");
       }

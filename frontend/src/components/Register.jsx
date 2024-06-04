@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, TextField, Button, Typography, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error message
+    setSuccess(""); // Reset success message
 
     try {
       const config = {
@@ -19,12 +23,24 @@ const Register = () => {
         },
       };
 
-      await axios.post(
+      const { data } = await axios.post(
         "/api/users/register",
         { name, email, password },
         config
       );
-      // If successful, you can navigate to login or another page
+      setSuccess("Congratulations! You registered successfully.");
+
+      console.log("Registered user info:", data); // Log user info to console
+
+      // Clear the form
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      // Redirect to login page after 2 seconds
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       if (
         error.response &&
@@ -43,6 +59,7 @@ const Register = () => {
         Register
       </Typography>
       {error && <Alert severity="error">{error}</Alert>}
+      {success && <Alert severity="success">{success}</Alert>}
       <form onSubmit={handleSubmit}>
         <TextField
           variant="outlined"

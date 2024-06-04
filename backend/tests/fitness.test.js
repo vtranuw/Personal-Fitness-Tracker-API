@@ -93,7 +93,6 @@ describe("Fitness API", () => {
     expect(res.body).toHaveProperty("message", "Exercise removed");
   }, 10000); // Increase the timeout for this test
 
-  // Additional test cases to improve coverage
   it("should handle errors when adding a new exercise", async () => {
     const res = await request(app)
       .post("/api/fitness")
@@ -128,7 +127,6 @@ describe("Fitness API", () => {
     expect(res.body).toHaveProperty("message", "Exercise not found");
   });
 
-  // Add test for total duration aggregation
   it("should get total exercise duration", async () => {
     await new Fitness({
       user: userId,
