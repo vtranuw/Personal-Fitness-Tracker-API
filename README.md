@@ -1,10 +1,10 @@
-# Personal Fitness Tracker
+#Fitness Tracker
 
 ## Project Overview
 
 ### Scenario
 
-In today's fast-paced world, maintaining a healthy lifestyle is crucial. Many individuals struggle to keep track of their fitness activities and goals. The Fitness Tracker API aims to provide a comprehensive solution for users to log, monitor, and analyze their fitness activities and progress.
+In today's fast-paced world, maintaining a healthy lifestyle is crucial. Many individuals struggle to keep track of their fitness activities and goals. The Fitness Tracker App aims to provide a comprehensive solution for users to log, monitor, and analyze their fitness activities and progress.
 
 ### Problem Statement
 
