@@ -52,6 +52,7 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 ### External Data Sources
 
 - No external data sources are currently planned.
+
 ## Project Requirements Fulfillment
 
 1. **Authentication and Authorization:**
@@ -86,20 +87,19 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 
 ## Timeline
 
-| **Week** | **Tasks**                                                | **Deliverables**                                         |
-| -------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| **1**    | - Set up project repo, MongoDB, and Express.             | - Basic project structure and initial DB setup.          |
-|          | - Design and implement the database schema.              | - Database schema with necessary indexes.                |
-|          | - Begin developing authentication mechanisms.            | - Partially completed authentication routes.             |
-| **2**    | - Complete authentication with JWT tokens.               | - Fully functional authentication system.                |
-|          | - Develop the first set of CRUD routes for profiles.     | - CRUD operations for user profiles.                     |
-|          | - Start the second set of CRUD for fitness activities.   | - Initial CRUD operations for fitness activities.        |
-| **3**    | - Finish CRUD routes for fitness activities.             | - Completion of CRUD operations for fitness activities.  |
-|          | - Implement one advanced MongoDB feature.                | - Advanced MongoDB feature integrated.                   |
-|          | - Start ReactJS front-end setup.                         | - Initial front-end setup and basic UI interactions.     |
-| **4**    | - Review and optimize database indexes and queries.      | - Optimized backend with appropriate indexes.            |
-|          | - Implement comprehensive tests for all routes.          | - Test suite with >80% coverage.                         |
-|          | - Prepare Postman collection and finalize documentation. | - Complete Postman collection and project documentation. |
+| **Week** | **Tasks**                                              | **Deliverables**                                        |
+| -------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| **1**    | - Set up project repo, MongoDB, and Express.           | - Basic project structure and initial DB setup.         |
+|          | - Design and implement the database schema.            | - Database schema with necessary indexes.               |
+|          | - Begin developing authentication mechanisms.          | - Partially completed authentication routes.            |
+| **2**    | - Complete authentication with JWT tokens.             | - Fully functional authentication system.               |
+|          | - Develop the first set of CRUD routes for profiles.   | - CRUD operations for user profiles.                    |
+|          | - Start the second set of CRUD for fitness activities. | - Initial CRUD operations for fitness activities.       |
+| **3**    | - Finish CRUD routes for fitness activities.           | - Completion of CRUD operations for fitness activities. |
+|          | - Implement one advanced MongoDB feature.              | - Advanced MongoDB feature integrated.                  |
+|          | - Start ReactJS front-end setup.                       | - Initial front-end setup and basic UI interactions.    |
+| **4**    | - Review and optimize database indexes and queries.    | - Optimized backend with appropriate indexes.           |
+|          | - Implement comprehensive tests for all routes.        | - Test suite with >80% coverage.                        |
 
 ## Using the App
 
