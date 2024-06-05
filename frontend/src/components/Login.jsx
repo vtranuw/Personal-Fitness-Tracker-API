@@ -14,6 +14,7 @@ const Login = () => {
     setError(""); // Reset error message
 
     try {
+      console.log("Sending login request...");
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +42,7 @@ const Login = () => {
       // Navigate to exercises page after login
       navigate("/exercises");
     } catch (error) {
+      console.error("Login error:", error);
       if (error.response && error.response.status === 401) {
         setError("Invalid email or password. Please try again.");
       } else {
