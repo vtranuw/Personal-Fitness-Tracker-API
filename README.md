@@ -29,6 +29,7 @@ The primary problem this project seeks to solve is the lack of a centralized, us
   - PUT `/api/fitness/:id`: Update a specific exercise.
   - DELETE `/api/fitness/:id`: Delete a specific exercise.
   - GET `/api/fitness/totalDuration`: Get the total duration of all exercises for the logged-in user.
+  - GET `/api/fitness/search`: Search exercises by text query.
 
 ### Data Models
 
@@ -55,35 +56,15 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 
 ## Project Requirements Fulfillment
 
-1. **Authentication and Authorization:**
-
-   - Implemented using JWT for secure user authentication and authorization.
-
-2. **Two sets of CRUD routes:**
-
-   - User Profiles: Full CRUD operations.
-   - Fitness Activities: Full CRUD operations.
-
-3. **Indexes for performance and uniqueness:**
-
-   - Unique indexes on `email` in the User model.
-   - Text index on `exercise` field in the Fitness model.
-
-4. **Advanced MongoDB feature:**
-
-   - Text search implemented in activities.
-   - Aggregations implemented for calculating total exercise duration.
-
-5. **Thorough testing (coverage > 80%):**
-
-   - Comprehensive tests using Jest and Supertest.
-
-6. **API interaction demonstration:**
-
-   - Frontend provided to demonstrate API interaction.
-
-7. **Simple front-end project (ReactJS + Vite + Material-ui):**
-   - Basic React frontend to interact with the API.
+| **Requirement**                                             | **Description**                                                            | **Status**  |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| **Authentication and Authorization**                        | Implemented using JWT for secure user authentication and authorization.    | Implemented |
+| **Two sets of CRUD routes**                                 | User Profiles and Fitness Activities with full CRUD operations.            | Implemented |
+| **Indexes for performance and uniqueness**                  | Unique indexes on `email` in the User model and text index on `exercise`.  | Implemented |
+| **Advanced MongoDB feature**                                | Text search implemented in activities and aggregations for total duration. | Implemented |
+| **Thorough testing (coverage > 80%)**                       | Comprehensive tests using Jest and Supertest with aim for >80% coverage.   | In Progress |
+| **API interaction demonstration**                           | Frontend provided to demonstrate API interaction.                          | Implemented |
+| **Simple front-end project (ReactJS + Vite + Material-UI)** | Basic React frontend to interact with the API.                             | Implemented |
 
 ## Timeline
 
@@ -105,7 +86,21 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 
 1. **Run the Backend Server:**
 
-   - Ensure the backend server is running on port 5001 by default.
+   - Ensure MongoDB is running.
+   - Navigate to the `backend` directory and install dependencies:
+
+     ```sh
+     cd backend
+     npm install
+     ```
+
+   - Start the backend server:
+
+     ```sh
+     npm start
+     ```
+
+   - The backend server should run on port 5002 by default.
 
 2. **Run the Frontend:**
 
