@@ -8,12 +8,12 @@ const generateToken = (id) => {
 };
 
 exports.registerUser = async (req, res) => {
-  console.log("Request body:", req.body); // Log the incoming request body for debugging
+  console.log("Request body:", req.body);
 
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    console.log("Missing required fields"); // Log missing fields error
+    console.log("Missing required fields");
     return res
       .status(400)
       .json({ message: "Please provide all required fields" });
@@ -23,7 +23,7 @@ exports.registerUser = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      console.log("User already exists"); // Log user exists error
+      console.log("User already exists");
       return res.status(400).json({ message: "User already exists" });
     }
 
@@ -34,7 +34,7 @@ exports.registerUser = async (req, res) => {
     });
 
     if (user) {
-      console.log("User created successfully"); // Log success message
+      console.log("User created successfully");
       res.status(201).json({
         _id: user._id,
         name: user.name,
@@ -42,11 +42,11 @@ exports.registerUser = async (req, res) => {
         token: generateToken(user._id),
       });
     } else {
-      console.log("Invalid user data"); // Log invalid user data error
+      console.log("Invalid user data");
       res.status(400).json({ message: "Invalid user data" });
     }
   } catch (error) {
-    console.error("Error creating user:", error); // Log any error during user creation
+    console.error("Error creating user:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

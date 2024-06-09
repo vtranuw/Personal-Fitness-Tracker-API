@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
 
     try {
       console.log("Sending login request...");
@@ -26,20 +26,18 @@ const Login = () => {
         { email, password },
         config
       );
-      localStorage.setItem("token", data.token); // Store the token
+      localStorage.setItem("token", data.token);
 
-      // Fetch user profile information
       const userProfile = await axios.get("/api/users/profile", {
         headers: {
           Authorization: `Bearer ${data.token}`,
         },
       });
 
-      localStorage.setItem("user", JSON.stringify(userProfile.data)); // Store user info
+      localStorage.setItem("user", JSON.stringify(userProfile.data));
 
-      console.log("Logged-in user info:", userProfile.data); // Log user info to console
+      console.log("Logged-in user info:", userProfile.data);
 
-      // Navigate to exercises page after login
       navigate("/exercises");
     } catch (error) {
       console.error("Login error:", error);

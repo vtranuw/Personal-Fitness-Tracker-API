@@ -10,8 +10,6 @@ const fitnessSchema = new mongoose.Schema({
   duration: { type: Number, required: true },
   date: { type: Date, default: Date.now },
 });
-
-// Add indexes
 fitnessSchema.index({ user: 1 });
 fitnessSchema.index({ exercise: "text" });
 

@@ -24,7 +24,7 @@ describe("User API", () => {
     });
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty("token");
-  }, 30000); // Increase the timeout for this test
+  }, 30000);
 
   it("should not register a user with the same email", async () => {
     await new User({
@@ -57,7 +57,7 @@ describe("User API", () => {
     });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("token");
-  }, 30000); // Increase the timeout for this test
+  }, 30000);
 
   it("should get user profile", async () => {
     const user = new User({

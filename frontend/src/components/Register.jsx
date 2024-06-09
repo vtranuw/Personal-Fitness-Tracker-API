@@ -13,8 +13,8 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
-    setSuccess(""); // Reset success message
+    setError("");
+    setSuccess("");
 
     try {
       const config = {
@@ -30,14 +30,12 @@ const Register = () => {
       );
       setSuccess("Congratulations! You registered successfully.");
 
-      console.log("Registered user info:", data); // Log user info to console
+      console.log("Registered user info:", data);
 
-      // Clear the form
       setName("");
       setEmail("");
       setPassword("");
 
-      // Redirect to login page after 2 seconds
       setTimeout(() => {
         navigate("/login");
       }, 2000);
