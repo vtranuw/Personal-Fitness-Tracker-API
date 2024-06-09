@@ -22,6 +22,8 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 - **Profile Routes:**
 
   - GET `/api/users/profile`: Retrieve the logged-in user's profile.
+  - PUT `/api/users/profile`: Update the logged-in user's profile.
+  - DELETE `/api/users/profile`: Delete the logged-in user's profile.
 
 - **Fitness Routes:**
   - GET `/api/fitness`: Retrieve all exercises for the logged-in user.
@@ -50,11 +52,7 @@ The primary problem this project seeks to solve is the lack of a centralized, us
     - **Date:** The date of the exercise, default is the current date.
   - Indexes: Index on `user` and text index on `exercise` for search functionality.
 
-### External Data Sources
-
-- No external data sources are currently planned.
-
-## Project Requirements Fulfillment
+### Project Requirements Fulfillment
 
 | **Requirement**                                             | **Description**                                                            | **Status**  |
 | ----------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
@@ -62,7 +60,7 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 | **Two sets of CRUD routes**                                 | User Profiles and Fitness Activities with full CRUD operations.            | Implemented |
 | **Indexes for performance and uniqueness**                  | Unique indexes on `email` in the User model and text index on `exercise`.  | Implemented |
 | **Advanced MongoDB feature**                                | Text search implemented in activities and aggregations for total duration. | Implemented |
-| **Thorough testing (coverage > 80%)**                       | Comprehensive tests using Jest and Supertest with aim for >80% coverage.   | In Progress |
+| **Thorough testing (coverage > 80%)**                       | Comprehensive tests using Jest and Supertest with >80% coverage.           | Implemented |
 | **API interaction demonstration**                           | Frontend provided to demonstrate API interaction.                          | Implemented |
 | **Simple front-end project (ReactJS + Vite + Material-UI)** | Basic React frontend to interact with the API.                             | Implemented |
 
@@ -88,40 +86,30 @@ The primary problem this project seeks to solve is the lack of a centralized, us
 
    - Ensure MongoDB is running.
    - Navigate to the `backend` directory and install dependencies:
-
      ```sh
      cd backend
      npm install
      ```
-
    - Start the backend server:
-
      ```sh
      npm start
      ```
-
    - The backend server should run on port 5002 by default.
 
 2. **Run the Frontend:**
 
    - Navigate to the `frontend` directory:
-
      ```sh
      cd frontend
      ```
-
    - Install frontend dependencies:
-
      ```sh
      npm install
      ```
-
    - Start the frontend development server:
-
      ```sh
      npm run dev
      ```
-
    - The frontend server should start on port 3001 by default.
 
 3. **Access the Application:**
@@ -154,7 +142,6 @@ The primary problem this project seeks to solve is the lack of a centralized, us
    - You can edit or delete exercises from this list.
 
 8. **View Total Exercise Duration:**
-
    - The total duration of all exercises will be displayed at the top of the exercise list.
 
 ## GitHub Repository
